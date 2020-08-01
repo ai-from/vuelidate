@@ -179,4 +179,5 @@
       .sub-title
         margin: 15px 0
         font-size: 16px
+        font-weight: bold
 </style>
