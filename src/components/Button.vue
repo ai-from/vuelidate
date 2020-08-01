@@ -27,4 +27,6 @@
     margin: 15px 0
     border: none
     cursor: pointer
+    font-family: Arial, monospace
+    font-size: 16px
 </style>
