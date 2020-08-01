@@ -14,7 +14,7 @@
         {{ item }}
       </option>
     </select>
-    <div class="error">{{ errorMsg }}</div>
+    <div class="error"><span>{{ errorMsg }}</span></div>
   </div>
 </template>
 
@@ -60,18 +60,21 @@
 
 <style lang="sass" scoped>
   .field
-    margin-bottom: 20px
+    margin-bottom: 7px
     .mini-title
       font-size: 14px
       margin-bottom: 4px
     .error
-      font-size: 14px
+      font-size: 12px
       color: red
+      height: 14px
       margin-top: 4px
-      display: none
+      span
+        display: none
     &.error
       .error
-        display: block
+        span
+          display: block
     select
       width: 100%
       &.doctor
