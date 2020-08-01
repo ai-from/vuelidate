@@ -42,8 +42,6 @@
       width: 100%
       border: 1px solid black
       padding: 0 15px
-      &:hover
-        border: 1px solid blue
     .error
       font-size: 14px
       color: red
