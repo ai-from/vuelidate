@@ -1,7 +1,11 @@
 <template>
   <div class="field">
     <label class="label" :for="forID">{{ label }}</label>
-    <input :id="forID" type="checkbox">
+    <input
+      :id="forID"
+      type="checkbox"
+      @click="$emit('click')"
+      >
   </div>
 </template>
 

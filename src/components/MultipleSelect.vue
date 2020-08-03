@@ -6,8 +6,10 @@
       <span v-if="isRequired">*</span>
     </div>
     <select
+      multiple
+      :size="size"
       :value="value"
-      @input="$emit('input', $event.target.value)"
+      @input="$emit('input', selected($event))"
     >
       <option
         v-for="(item, index) in options"
@@ -22,12 +24,16 @@
 
 <script>
   export default {
-    name: 'Select',
+    name: 'MultipleSelect',
     props: {
       value: {},
       isRequired: {
         type: Boolean,
         default: false
+      },
+      size: {
+        type: Number,
+        default: 3
       },
       title: {
         type: String,
@@ -45,6 +51,12 @@
         type: Boolean,
         default: false
       }
+    },
+    methods: {
+      selected(e) {
+        const values = [...e.target.options].filter(x => x.selected).map(x => x.value)
+        return values
+      }
     }
   }
 </script>
@@ -55,6 +67,11 @@
     .mini-title
       font-size: 14px
       margin-bottom: 4px
+    select
+      width: 100%
+      option
+        font-size: 14px
+        cursor: pointer
     .error
       font-size: 12px
       color: red
@@ -68,7 +85,4 @@
       .error
         span
           display: block
-    select
-      width: 100%
-      height: 40px
 </style>

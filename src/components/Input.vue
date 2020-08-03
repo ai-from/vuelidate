@@ -1,8 +1,16 @@
 <template>
   <div class="field"
        :class="{error: isError}">
-    <div class="mini-title">{{ title }}</div>
-    <input type="text" :placeholder="placeholder">
+    <div class="mini-title">
+      {{ title }}
+      <span v-if="isRequired">*</span>
+    </div>
+    <input
+      type="text"
+      :placeholder="placeholder"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+    >
     <div class="error"><span>{{ errorMsg }}</span></div>
   </div>
 </template>
@@ -11,6 +19,11 @@
   export default {
     name: 'Input',
     props: {
+      value: {},
+      isRequired: {
+        type: Boolean,
+        default: false
+      },
       title: {
         type: String,
         default: 'Title'
@@ -26,6 +39,10 @@
       isError: {
         type: Boolean,
         default: false
+      },
+      model: {
+        type: '',
+        default: ''
       }
     }
   }
