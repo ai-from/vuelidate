@@ -5,35 +5,28 @@
       {{ title }}
       <span v-if="isRequired">*</span>
     </div>
-    <select
-      multiple
-      :size="size"
-      :value="value"
-      @input="$emit('input', selected($event))"
-    >
-      <option
+    <div class="wrap">
+      <div
+        class="item"
         v-for="(item, index) in options"
         :key="index"
+        @click="itemClick($event)"
       >
         {{ item }}
-      </option>
-    </select>
+      </div>
+    </div>
     <div class="error"><span>{{ errorMsg }}</span></div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'MultipleSelect',
+    name: 'Multiple',
     props: {
       value: {},
       isRequired: {
         type: Boolean,
         default: false
-      },
-      size: {
-        type: Number,
-        default: 3
       },
       title: {
         type: String,
@@ -53,9 +46,15 @@
       }
     },
     methods: {
-      selected(e) {
-        const values = [...e.target.options].filter(x => x.selected).map(x => x.value)
-        return values
+      itemClick(e) {
+        const i = e.target.classList
+        const y = 'selected'
+        i.contains(y) ? i.remove(y) : i.add(y)
+
+        const list = e.target.parentNode.querySelectorAll('.'+y)
+        const values = Array.prototype.slice.call(list).map(x => x.innerText)
+
+        this.$emit('input', values)
       }
     }
   }
@@ -67,20 +66,25 @@
     .mini-title
       font-size: 14px
       margin-bottom: 4px
-    select
+    .wrap
       width: 100%
-      option
+      height: 50px
+      overflow-y: auto
+      border: 1px solid $grey
+      .item
         font-size: 14px
         cursor: pointer
+        &.selected
+          background: $grey
     .error
       font-size: 12px
-      color: red
+      color: $red
       height: 14px
       margin-top: 4px
       span
         display: none
     &.error
-      select
+      .wrap
         border: 1px solid red
       .error
         span

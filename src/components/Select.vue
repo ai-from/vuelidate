@@ -57,7 +57,7 @@
       margin-bottom: 4px
     .error
       font-size: 12px
-      color: red
+      color: $red
       height: 14px
       margin-top: 4px
       span
@@ -69,6 +69,7 @@
         span
           display: block
     select
+      border: 1px solid $grey
       width: 100%
       height: 40px
 </style>

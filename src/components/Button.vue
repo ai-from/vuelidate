@@ -22,10 +22,11 @@
   button
     height: 40px
     padding: 0 25px
-    background: green
-    color: white
     margin: 15px 0
     border: none
     cursor: pointer
     font-size: 16px
+    &.green
+      background: $green
+      color: $white
 </style>

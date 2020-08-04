@@ -54,12 +54,12 @@
       <v-multiple-select
         class="clients"
         :isRequired="true"
-        :size="3"
         title="Группа клиентов"
         :options="['VIP', 'Проблемные', 'ОМС']"
         errorMsg="Необходим как минимум один пункт"
         v-model="clients"
         :isError="$v.$dirty && $v.clients.$invalid"
+        @input="multipleInput"
       />
 
       <v-select
@@ -177,10 +177,11 @@
       <v-button
         btnType="submit"
         title="Отправить"
+        class="green"
       />
 
       <div class="note">
-        Поля, отмеченные звездочкой (*) - обязательны для заполнения
+        Поля, отмеченные звездочкой (*), обязательны для заполнения
       </div>
 
       <div class="res">
@@ -262,14 +263,14 @@
     methods: {
       onSubmit() {
         this.$v.$touch()
-
         this.$v.$invalid ? this.goodForm = false : this.goodForm = true
-
         console.log(this.$v.clients)
-
       },
       checkboxClick() {
         this.noSMS = !this.noSMS
+      },
+      multipleInput(val) {
+        this.clients = val
       }
     }
   }
@@ -294,10 +295,15 @@
         font-size: 14px
         height: 16px
         .error
-          color: red
+          color: $red
         .ok
-          color: green
+          color: $green
       .note
         font-size: 14px
         margin: 5px 0
+
+  @media screen and (max-width: 374px)
+    .form-vuelidate
+      width: 100%
+      padding: 10px
 </style>

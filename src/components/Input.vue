@@ -57,11 +57,11 @@
     input
       height: 40px
       width: 100%
-      border: 1px solid black
+      border: 1px solid $grey
       padding: 0 15px
     .error
       font-size: 12px
-      color: red
+      color: $red
       height: 14px
       margin-top: 4px
       span
