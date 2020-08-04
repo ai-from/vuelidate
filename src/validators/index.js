@@ -24,7 +24,7 @@ export function indexFormat(val) {
 }
 
 export function namingFormat(val) {
-  return /^([^\-\s]{2}[A-zА-яЁё\-\s]*)*$/.test(val)
+  return /^([A-zА-яЁё]{2}[A-zА-яЁё\-\s]*)*$/.test(val)
 }
 
 export function houseFormat(val) {

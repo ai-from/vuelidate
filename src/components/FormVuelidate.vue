@@ -9,7 +9,7 @@
         :isRequired="true"
         title="Фамилия"
         placeholder="Иванов"
-        errorMsg="Только буквы. От 2 до 16 символов вкл."
+        :errorMsg="errors.surname($v.surname.$params.minLength.min, $v.surname.$params.maxLength.max)"
         v-model="surname"
         :isError="$v.$dirty && $v.surname.$invalid"
       />
@@ -18,7 +18,7 @@
         :isRequired="true"
         title="Имя"
         placeholder="Иван"
-        errorMsg="Только буквы. От 2 до 16 символов вкл."
+        :errorMsg="errors.name($v.name.$params.minLength.min, $v.name.$params.maxLength.max)"
         v-model="name"
         :isError="$v.$dirty && $v.name.$invalid"
       />
@@ -26,7 +26,7 @@
       <v-input
         title="Отчество"
         placeholder="Иванович"
-        errorMsg="Только буквы. От 2 до 16 символов вкл."
+        :errorMsg="errors.patronymic($v.patronymic.$params.minLength.min, $v.patronymic.$params.maxLength.max)"
         v-model="patronymic"
         :isError="$v.$dirty && $v.patronymic.$invalid"
       />
@@ -35,7 +35,7 @@
         :isRequired="true"
         title="Дата рождения"
         placeholder="05.05.1990"
-        errorMsg="Необходимый формат: XX.XX.XXXX"
+        :errorMsg="errors.birthday"
         v-model="birthday"
         :isError="$v.$dirty && $v.birthday.$invalid"
       />
@@ -44,7 +44,7 @@
         :isRequired="true"
         title="Номер телефона"
         placeholder="7 999 999 99 99"
-        errorMsg="Необходимый формат: 7 XXX XXX XX XX"
+        :errorMsg="errors.phone"
         v-model="phone"
         :isError="$v.$dirty && $v.phone.$invalid"
       />
@@ -56,7 +56,7 @@
         :isRequired="true"
         title="Группа клиентов"
         :options="['VIP', 'Проблемные', 'ОМС']"
-        errorMsg="Необходим как минимум один пункт"
+        :errorMsg="errors.clients"
         v-model="clients"
         :isError="$v.$dirty && $v.clients.$invalid"
         @input="multipleInput"
@@ -66,7 +66,6 @@
         class="doctor"
         title="Лечащий врач"
         :options="['Иванов', 'Захаров', 'Чернышева']"
-        errorMsg="Error"
         v-model="doctor"
         :isError="$v.$dirty && $v.doctor.$invalid"
       />
@@ -83,7 +82,7 @@
       <v-input
         title="Индекс"
         placeholder="999999"
-        errorMsg="Только цифры. Формат: XXXXXX"
+        :errorMsg="errors.index"
         v-model="index"
         :isError="$v.$dirty && $v.index.$invalid"
       />
@@ -91,7 +90,7 @@
       <v-input
         title="Страна"
         placeholder="Россия"
-        errorMsg="Буквы и знак дефиса. От 2 до 16 символов вкл."
+        :errorMsg="errors.country($v.country.$params.minLength.min, $v.country.$params.maxLength.max)"
         v-model="country"
         :isError="$v.$dirty && $v.country.$invalid"
       />
@@ -99,7 +98,7 @@
       <v-input
         title="Область"
         placeholder="Московская"
-        errorMsg="Буквы и знак дефиса. От 2 до 16 символов вкл."
+        :errorMsg="errors.area($v.area.$params.minLength.min, $v.area.$params.maxLength.max)"
         v-model="area"
         :isError="$v.$dirty && $v.area.$invalid"
       />
@@ -108,7 +107,7 @@
         :isRequired="true"
         title="Город"
         placeholder="Москва"
-        errorMsg="Буквы и знак дефиса. От 2 до 16 символов вкл."
+        :errorMsg="errors.city($v.city.$params.minLength.min, $v.city.$params.maxLength.max)"
         v-model="city"
         :isError="$v.$dirty && $v.city.$invalid"
       />
@@ -116,7 +115,7 @@
       <v-input
         title="Улица"
         placeholder="Центральная"
-        errorMsg="Буквы и знак дефиса. От 2 до 16 символов вкл."
+        :errorMsg="errors.street($v.street.$params.minLength.min, $v.street.$params.maxLength.max)"
         v-model="street"
         :isError="$v.$dirty && $v.street.$invalid"
       />
@@ -124,7 +123,7 @@
       <v-input
         title="Дом"
         placeholder="77"
-        errorMsg="Только цифры. До 5 символов вкл."
+        :errorMsg="errors.house($v.house.$params.maxLength.max)"
         v-model="house"
         :isError="$v.$dirty && $v.house.$invalid"
       />
@@ -136,7 +135,7 @@
         class="document-type"
         title="Тип документа"
         :options="['Паспорт', 'Свидетельство о рождении', 'Вод. удостоверение']"
-        errorMsg="Выберите тип документа"
+        :errorMsg="errors.documentType"
         v-model="documentType"
         :isError="$v.$dirty && $v.documentType.$invalid"
       />
@@ -144,7 +143,7 @@
       <v-input
         title="Серия"
         placeholder="99 99"
-        errorMsg="Только цифры. Формат: XX XX"
+        :errorMsg="errors.series"
         v-model="series"
         :isError="$v.$dirty && $v.series.$invalid"
       />
@@ -152,7 +151,7 @@
       <v-input
         title="Номер"
         placeholder="999-999"
-        errorMsg="Только цифры. Формат: XXX-XXX"
+        :errorMsg="errors.number"
         v-model="number"
         :isError="$v.$dirty && $v.number.$invalid"
       />
@@ -160,7 +159,7 @@
       <v-input
         title="Кем выдан"
         placeholder="Центральным РУВД"
-        errorMsg="Только буквы. От 2 до 70 символов"
+        :errorMsg="errors.issuedBy($v.issuedBy.$params.minLength.min, $v.issuedBy.$params.minLength.max)"
         v-model="issuedBy"
         :isError="$v.$dirty && $v.issuedBy.$invalid"
       />
@@ -169,9 +168,9 @@
         :isRequired="true"
         title="Дата выдачи"
         placeholder="05.05.1990"
-        errorMsg="Необходимый формат: XX.XX.XXXX"
-        v-model="data"
-        :isError="$v.$dirty && $v.data.$invalid"
+        :errorMsg="errors.date"
+        v-model="date"
+        :isError="$v.$dirty && $v.date.$invalid"
       />
 
       <v-button
@@ -196,7 +195,8 @@
 
 <script>
   import {required, minLength, maxLength} from "vuelidate/lib/validators"
-  import {dateFormat, phoneFormat, indexFormat, namingFormat, houseFormat, seriesFormat, numberFormat} from "../validators/customValidators"
+  import {dateFormat, phoneFormat, indexFormat, namingFormat, houseFormat, seriesFormat, numberFormat} from "../validators"
+  import errors from "@/errors"
   import Input from "./Input"
   import Sex from "./Sex"
   import Select from "./Select"
@@ -207,6 +207,7 @@
   export default {
     name: 'FormVuelidate',
     data: () => ({
+      errors,
       title: 'Форма регистрации',
       goodForm: true,
       surname: '',
@@ -228,12 +229,12 @@
       series: '',
       number: '',
       issuedBy: '',
-      data: ''
+      date: ''
     }),
     validations: {
-      surname: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
-      name: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
-      patronymic: {namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
+      surname: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
+      name: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
+      patronymic: {namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
       birthday: {required, dateFormat},
       phone: {required, phoneFormat},
       sex: {},
@@ -241,16 +242,16 @@
       doctor: {},
       noSMS: {},
       index: {indexFormat},
-      country: {namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
-      area: {namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
-      city: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
-      street: {namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
+      country: {namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
+      area: {namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
+      city: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
+      street: {namingFormat, minLength: minLength(2), maxLength: maxLength(40)},
       house: {houseFormat, maxLength: maxLength(5)},
       documentType: {required},
       series: {seriesFormat},
       number: {numberFormat},
-      issuedBy: {namingFormat, minLength: minLength(2), maxLength: maxLength(70)},
-      data: {required, dateFormat}
+      issuedBy: {namingFormat, minLength: minLength(2), maxLength: maxLength(100)},
+      date: {required, dateFormat}
     },
     components: {
       'v-input': Input,
