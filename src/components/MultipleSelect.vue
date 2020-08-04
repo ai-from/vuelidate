@@ -77,6 +77,7 @@
       .item
         font-size: 14px
         cursor: pointer
+        white-space: nowrap
         &.selected
           background: $grey
     .error
