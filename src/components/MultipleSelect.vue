@@ -7,12 +7,13 @@
     </div>
     <div class="wrap">
       <div
-        class="item"
-        v-for="(item, index) in options"
+        v-for="(item, index) in optionsReady"
         :key="index"
-        @click="itemClick($event)"
+        class="item"
+        :class="{selected: item.selected}"
+        @click="itemClick(item)"
       >
-        {{ item }}
+        {{ item.value }}
       </div>
     </div>
     <div class="error"><span>{{ errorMsg }}</span></div>
@@ -21,9 +22,8 @@
 
 <script>
   export default {
-    name: 'Multiple',
+    name: 'MultipleSelect',
     props: {
-      value: {},
       isRequired: {
         type: Boolean,
         default: false
@@ -45,17 +45,20 @@
         default: false
       }
     },
+    data: () => ({
+      optionsReady: []
+    }),
     methods: {
-      itemClick(e) {
-        const i = e.target.classList
-        const y = 'selected'
-        i.contains(y) ? i.remove(y) : i.add(y)
-
-        const list = e.target.parentNode.querySelectorAll('.'+y)
-        const values = Array.prototype.slice.call(list).map(x => x.innerText)
-
+      itemClick(i) {
+        i.selected ? i.selected = false : i.selected = true
+        const values = this.optionsReady.filter(x => x.selected).map(x => x.value)
         this.$emit('input', values)
       }
+    },
+    mounted() {
+      const obj = []
+      this.options.forEach(i => {obj.push({value: i, selected: false})})
+      this.optionsReady = obj
     }
   }
 </script>
