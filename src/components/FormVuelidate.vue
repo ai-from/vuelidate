@@ -26,7 +26,7 @@
       <v-input
         title="Отчество"
         placeholder="Иванович"
-        errorMsg="Только буквы. До 16 символов вкл."
+        errorMsg="Только буквы. От 2 до 16 символов вкл."
         v-model="patronymic"
         :isError="$v.$dirty && $v.patronymic.$invalid"
       />
@@ -160,7 +160,7 @@
       <v-input
         title="Кем выдан"
         placeholder="Центральным РУВД"
-        errorMsg="Только буквы. До 70 символов"
+        errorMsg="Только буквы. От 2 до 70 символов"
         v-model="issuedBy"
         :isError="$v.$dirty && $v.issuedBy.$invalid"
       />
@@ -233,7 +233,7 @@
     validations: {
       surname: {required, lettersRusEng, minLength: minLength(2), maxLength: maxLength(16)},
       name: {required, lettersRusEng, minLength: minLength(2), maxLength: maxLength(16)},
-      patronymic: {lettersRusEng, maxLength: maxLength(16)},
+      patronymic: {lettersRusEng, minLength: minLength(2), maxLength: maxLength(16)},
       birthday: {required, dateFormat},
       phone: {required, phoneFormat},
       sex: {},
@@ -249,7 +249,7 @@
       documentType: {required},
       series: {seriesFormat},
       number: {numberFormat},
-      issuedBy: {lettersRusEng, maxLength: maxLength(70)},
+      issuedBy: {lettersRusEng, minLength: minLength(2), maxLength: maxLength(70)},
       data: {required, dateFormat}
     },
     components: {
