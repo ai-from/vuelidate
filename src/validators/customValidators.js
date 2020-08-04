@@ -3,7 +3,20 @@ export function lettersRusEng(val) {
 }
 
 export function dateFormat(val) {
-  return /^[\d]{2}.[\d]{2}.[\d]{4}$/.test(val)
+  const format = /^[\d]{2}.[\d]{2}.[\d]{4}$/.test(val)
+  const day = Number(val.slice(0,2))
+  const month = Number(val.slice(3,5))
+  const year = Number(val.slice(6,10))
+  let days = 0
+
+  const monthStatus = month > 0 && month <= 12
+  const yearStatus = year > 1899 && year <= new Date().getFullYear()
+
+  if (monthStatus && yearStatus) {days = new Date(year, month, 0).getDate()}
+
+  const dayStatus = day > 0 && day <= days
+
+  return format && dayStatus
 }
 
 export function phoneFormat(val) {

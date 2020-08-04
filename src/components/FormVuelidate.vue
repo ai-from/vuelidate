@@ -264,7 +264,6 @@
       onSubmit() {
         this.$v.$touch()
         this.$v.$invalid ? this.goodForm = false : this.goodForm = true
-        console.log(this.$v.clients)
       },
       checkboxClick() {
         this.noSMS = !this.noSMS
