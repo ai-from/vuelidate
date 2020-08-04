@@ -1,7 +1,3 @@
-export function lettersRusEng(val) {
-  return /^[A-zА-яЁё]*$/.test(val)
-}
-
 export function dateFormat(val) {
   const format = /^[\d]{2}.[\d]{2}.[\d]{4}$/.test(val)
   const day = Number(val.slice(0,2))
@@ -28,7 +24,7 @@ export function indexFormat(val) {
 }
 
 export function namingFormat(val) {
-  return /^[^\-]{2}[A-zА-яЁё\-]*$/.test(val)
+  return /^([^\-\s]{2}[A-zА-яЁё\-\s]*)*$/.test(val)
 }
 
 export function houseFormat(val) {

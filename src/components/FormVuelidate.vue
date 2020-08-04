@@ -196,7 +196,7 @@
 
 <script>
   import {required, minLength, maxLength} from "vuelidate/lib/validators"
-  import {lettersRusEng, dateFormat, phoneFormat, indexFormat, namingFormat, houseFormat, seriesFormat, numberFormat} from "../validators/customValidators"
+  import {dateFormat, phoneFormat, indexFormat, namingFormat, houseFormat, seriesFormat, numberFormat} from "../validators/customValidators"
   import Input from "./Input"
   import Sex from "./Sex"
   import Select from "./Select"
@@ -231,9 +231,9 @@
       data: ''
     }),
     validations: {
-      surname: {required, lettersRusEng, minLength: minLength(2), maxLength: maxLength(16)},
-      name: {required, lettersRusEng, minLength: minLength(2), maxLength: maxLength(16)},
-      patronymic: {lettersRusEng, minLength: minLength(2), maxLength: maxLength(16)},
+      surname: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
+      name: {required, namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
+      patronymic: {namingFormat, minLength: minLength(2), maxLength: maxLength(16)},
       birthday: {required, dateFormat},
       phone: {required, phoneFormat},
       sex: {},
@@ -249,7 +249,7 @@
       documentType: {required},
       series: {seriesFormat},
       number: {numberFormat},
-      issuedBy: {lettersRusEng, minLength: minLength(2), maxLength: maxLength(70)},
+      issuedBy: {namingFormat, minLength: minLength(2), maxLength: maxLength(70)},
       data: {required, dateFormat}
     },
     components: {
