@@ -4,7 +4,6 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 Vue.use(Vuelidate)
-Vue.use(Error)
 
 new Vue({
   render: h => h(App)
