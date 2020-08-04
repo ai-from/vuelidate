@@ -59,6 +59,7 @@
       width: 100%
       border: 1px solid $grey
       padding: 0 15px
+      font-size: 14px
     .error
       font-size: 12px
       color: $red

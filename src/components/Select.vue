@@ -72,4 +72,5 @@
       border: 1px solid $grey
       width: 100%
       height: 40px
+      font-size: 14px
 </style>
