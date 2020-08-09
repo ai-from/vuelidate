@@ -1,4 +1,4 @@
-# Form-vuelidate
+# Vuelidate
 
 ## Project setup
 ```
